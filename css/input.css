@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+
+@font-face {
+  font-family: 'roboto-medium';
+  src: url(../assets/font/roboto.medium.ttf);
+}
+
+@tailwind utilities;

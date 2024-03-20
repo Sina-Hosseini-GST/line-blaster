@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Line Blaster</title>
+  <link href="./css/styles.css" rel="stylesheet">
+</head>
+<body class="font-c text-xs text-white">
+  <header class="bg-sky-500 border-b-2 fixed z-10 inset-x-0 top-0 border-zinc-400 h-14 flex justify-center items-center">
+    <h1 class="tracking-c">
+      <strong>Line Blaster</strong> - v1.0
+    </h1>
+  </header>
+  <aside class="w-14 bg-yellow-400 text-blue-950 border-r-2 border-zinc-400 fixed top-14 bottom-0 left-0 flex justify-center items-center">
+    <p class="-rotate-90 whitespace-nowrap opacity-0 transition-opacity duration-500 tracking-widest" id="message"></p>
+  </aside>
+  <main class="pl-14 pt-14">
+    <section>
+      <form class="flex text-black">
+        <div class="flex flex-col flex-1">
+          <input class="bg-stone-50 h-8 p-4 focus:bg-white transition-colors placeholder:text-gray-400 focus:outline-none" type="text" placeholder="Script">
+          <input class="bg-stone-50 h-8 p-4 border-y border-gray-300 focus:bg-white transition-colors placeholder:text-gray-400 focus:outline-none" type="number" min="1" placeholder="Maximum Characters For Each Line">
+          <div class="h-8 p-4 flex items-center gap-1.5 bg-stone-100">
+            <input class="size-4 accent-gray-500" id="zwnj-checkbox" type="checkbox">
+            <label class="flex-1" for="zwnj-checkbox">
+              Ignore ZWNJ => <i>for Persian language</i>
+            </label>
+          </div>
+        </div>
+        <button class="w-24 text-white border-l border-b border-gray-300 flex justify-center items-center bg-black" type="submit">
+          <svg class="fill-white w-4" xmlns="http://www.w3.org/2000/svg" viewBox="5 4 15 17"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M11 9l1.42 1.42L8.83 14H18V4h2v12H8.83l39 38L11 21l-6-6 6-6z"></path></svg>
+        </button>
+      </form>
+    </section>
+    <section>
+      <table class="w-full table-fixed">
+        <thead class="bg-gray-700 sticky top-14">
+          <tr class="h-8">
+            <th class="w-2/12 text-center border border-white">Line</th>
+            <th class="w-8/12 text-center border border-white">Script</th>
+            <th class="w-2/12 text-center border border-white">Length</th>
+          </tr>
+        </thead>
+        <tbody class="bg-gray-500">
+          <tr class="h-8">
+            <td class="w-2/12 text-center border border-white overflow-auto px-3">
+              <p class="whitespace-nowrap">
+                -
+              </p>
+            </td>
+            <td class="w-8/12 text-center border border-white overflow-auto px-3">
+              <p class="whitespace-nowrap">
+                -
+              </p>
+            </td>
+            <td class="w-2/12 text-center border border-white overflow-auto px-3">
+              <p class="whitespace-nowrap">
+                -
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <script src="./js/app.min.js"></script>
+</body>
+</html>
