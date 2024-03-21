@@ -4,7 +4,9 @@ const number = document.querySelector('input[type=number]');
 const ignoreZwnjCheckbox = document.querySelector('#zwnj-checkbox');
 const tbody = document.querySelector('tbody');
 const messageContainer = document.querySelector('#message');
-const board = document.querySelector('article');
+const article = document.querySelector('article');
+const scriptWithBreakLinesContainer = document.querySelector('#script-with-breaklines');
+const minimumNumberOfLinesContainer = document.querySelector('#minimum-number-of-lines');
 
 const zwnj = '‌';
 const space = ' ';
@@ -15,12 +17,17 @@ form.addEventListener('submit', (event) => {
   // Input values
   let script = text.value.trim().replace(/  +/g, space);
   const maximumCharactersPerLine = number.value;
+
+  // Other values
   let minimumNumberOfLines = 0;
   let subScript = '';
   let subScriptLength = 0;
   let zwnjCounter = 0;
   let validationFlag = true;
   let scriptUpToTheFirstSpaceAfterZwnj = '';
+  let scriptWithBreakLines = '';
+
+  article.classList.add('hidden');
 
   // If there is no script, and there is no maximum amount of characters set
   if (!script && !maximumCharactersPerLine) {
@@ -103,6 +110,7 @@ form.addEventListener('submit', (event) => {
             subScript = wordsWithoutTheLastSpace;
             subScriptLength = subScript.length - zwnjCounter;
             addSubScriptToTheTable(minimumNumberOfLines, subScript, subScriptLength);
+            scriptWithBreakLines += `<p class="h-6 flex justify-center items-center">${subScript}</p>`;
             script = script.substring(i + 1, script.length);
             i = 0;
             zwnjCounter = 0;
@@ -120,6 +128,7 @@ form.addEventListener('submit', (event) => {
             subScript = script.substring(0, index);
             subScriptLength = subScript.length - zwnjCounter;
             addSubScriptToTheTable(minimumNumberOfLines, subScript, subScriptLength);
+            scriptWithBreakLines += `<p class="h-6 flex justify-center items-center">${subScript}</p>`;
             script = script.substring(index + 1, script.length);
             i = 0;
             zwnjCounter = 0;
@@ -133,6 +142,7 @@ form.addEventListener('submit', (event) => {
           if (subScript.length != 0) {
             subScriptLength = subScript.length - zwnjCounter;
             addSubScriptToTheTable(minimumNumberOfLines, subScript, subScriptLength);
+            scriptWithBreakLines += `<p class="h-6 flex justify-center items-center">${subScript}</p>`;
           }
         }
       }
@@ -142,23 +152,31 @@ form.addEventListener('submit', (event) => {
   // Success message
   if (minimumNumberOfLines) {
     writeMessage('Thank you for choosing Line Blaster!');
+    scriptWithBreakLinesContainer.innerHTML = scriptWithBreakLines;
+    article.classList.remove('hidden');
+    const minimumNumberOfLinesHexValue = (minimumNumberOfLines.toString(16).length == 1) ? `0${minimumNumberOfLines.toString(16)}` : minimumNumberOfLines.toString(16);
+    minimumNumberOfLinesContainer.innerHTML = `Just <span class="cursor-pointer underline-offset-4 hover:underline" onclick="copy(this)" title="Copy">${minimumNumberOfLines}</span> (<span class="cursor-pointer underline-offset-4 hover:underline" onclick="copy(this)" title="Copy">${minimumNumberOfLinesHexValue}</span>) lines!`;
   }
 });
 
-const addSubScriptToTheTable = (minimumNumberOfLines, subScript, subScriptLength) => {
+const addSubScriptToTheTable = (lineNumber, subScript, subScriptLength) => {
+  const lineNumberIsNumber = (typeof lineNumber == 'number') ? true : false;
+
+  const lineNumberHexValue = (lineNumberIsNumber && lineNumber.toString(16).length == 1) ? `0${lineNumber.toString(16)}` : lineNumber.toString(16);
+
   tbody.insertAdjacentHTML('beforeend',
   `<tr class="h-8 hover:bg-gray-500 transition-colors">
-    <td class="w-2/12 text-center border border-white overflow-auto px-3.5">
+    <td class="w-2/12 text-center border border-white overflow-auto">
       <p class="whitespace-nowrap">
-        ${minimumNumberOfLines}
+        ${(lineNumberIsNumber) ? '#' : ''}${(lineNumberIsNumber) ? `<span class="cursor-pointer underline-offset-4 hover:underline" onclick="copy(this)" title="Copy">${lineNumber}</span>` : lineNumber} ${(lineNumberIsNumber) ? `[<span class="cursor-pointer underline-offset-4 hover:underline" onclick="copy(this)" title="Copy">${lineNumberHexValue}</span>]` : ''}
       </p>
     </td>
-    <td class="w-8/12 text-center border border-white hover:bg-gray-400 transition-colors overflow-auto px-3.5 cursor-pointer" onclick="copy(this)" title="Copy">
+    <td class="w-8/12 text-center border border-white hover:bg-gray-400 transition-colors overflow-auto cursor-pointer" onclick="copy(this)" title="Copy">
       <p class="whitespace-nowrap">
         ${subScript}
       </p>
     </td>
-    <td class="w-2/12 text-center border border-white overflow-auto px-3.5">
+    <td class="w-2/12 text-center border border-white overflow-auto">
       <p class="whitespace-nowrap">
         ${subScriptLength}
       </p>
@@ -176,7 +194,7 @@ const setPosition = (element) => {
   element.style.top = `${Math.round(Math.random() * 5)}px`;
 }
 
-const writeMessage = (customMessage) => {
+const writeMessage = (message) => {
   // Hide message
   messageContainer.classList.remove('opacity-100');
   messageContainer.classList.add('opacity-0');
@@ -186,17 +204,8 @@ const writeMessage = (customMessage) => {
     messageContainer.classList.remove('opacity-0');
     messageContainer.classList.add('opacity-100');
 
-    const message = customMessage;
-
-    // Remove message
-    messageContainer.innerHTML = '';
-
     // Add message
-    for (let i = 0; i < message.length; i++) {
-      const messageLetter = message[i];
-      const span = `<span class="${(messageLetter == space) ? '' : 'inline-block transition-c duration-500 relative'}">${messageLetter}</span>`;
-      messageContainer.innerHTML += span;
-    }
+    messageContainer.textContent = message;
   }, 500);
 };
 

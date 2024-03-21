@@ -10,7 +10,7 @@
 <body class="font-c text-xs text-white">
   <header class="bg-sky-500 border-b-2 fixed z-10 inset-x-0 top-0 border-zinc-400 h-14 flex justify-center items-center">
     <h1 class="tracking-c">
-      <strong>Line Blaster</strong> - v1.0
+      <strong>Line Blaster</strong> - v1.1
     </h1>
   </header>
   <aside class="w-14 bg-yellow-400 text-blue-950 border-r-2 border-zinc-400 fixed top-14 bottom-0 left-0 flex justify-center items-center">
@@ -25,11 +25,11 @@
           <div class="h-8 p-4 flex items-center gap-1.5 bg-stone-100">
             <input class="size-4 accent-gray-500" id="zwnj-checkbox" type="checkbox">
             <label class="flex-1" for="zwnj-checkbox">
-              Ignore ZWNJ => <i>for Persian language</i>
+              Ignore ZWNJ (<i>Persian</i>)
             </label>
           </div>
         </div>
-        <button class="w-24 text-white border-l border-b border-gray-300 flex justify-center items-center bg-black" type="submit">
+        <button class="w-24 text-white border-l border-gray-300 flex justify-center items-center bg-black" type="submit">
           <svg class="fill-white w-4" xmlns="http://www.w3.org/2000/svg" viewBox="5 4 15 17"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M11 9l1.42 1.42L8.83 14H18V4h2v12H8.83l39 38L11 21l-6-6 6-6z"></path></svg>
         </button>
       </form>
@@ -45,17 +45,17 @@
         </thead>
         <tbody class="bg-gray-500">
           <tr class="h-8">
-            <td class="w-2/12 text-center border border-white overflow-auto px-3">
+            <td class="w-2/12 text-center border border-white overflow-auto">
               <p class="whitespace-nowrap">
                 -
               </p>
             </td>
-            <td class="w-8/12 text-center border border-white overflow-auto px-3">
+            <td class="w-8/12 text-center border border-white overflow-auto">
               <p class="whitespace-nowrap">
                 -
               </p>
             </td>
-            <td class="w-2/12 text-center border border-white overflow-auto px-3">
+            <td class="w-2/12 text-center border border-white overflow-auto">
               <p class="whitespace-nowrap">
                 -
               </p>
@@ -64,6 +64,13 @@
         </tbody>
       </table>
     </section>
+    <article class="bg-stone-700 hidden">
+      <p class="flex justify-center items-center bg-stone-900 h-8 tracking-widest" id="minimum-number-of-lines"></p>
+      <h2 class="h-8 bg-stone-800 flex justify-center items-center border-y border-white">
+        Script With Breaklines
+      </h2>
+      <div class="cursor-pointer text-center hover:bg-stone-600 transition-colors" id="script-with-breaklines" onclick="copy(this)" title="Copy"></div>
+    </article>
   </main>
   <script src="./js/app.min.js"></script>
 </body>

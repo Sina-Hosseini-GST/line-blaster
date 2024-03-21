@@ -9,9 +9,6 @@ module.exports = {
       fontFamily: {
         'c': ['roboto-medium', 'sans-serif'],
       },
-      transitionProperty: {
-        'c': 'inset',
-      },
       letterSpacing: {
         'c': '.25em'
       }
