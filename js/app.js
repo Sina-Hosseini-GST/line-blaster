@@ -155,7 +155,7 @@ form.addEventListener('submit', (event) => {
     scriptWithBreakLinesContainer.innerHTML = scriptWithBreakLines;
     article.classList.remove('hidden');
     const minimumNumberOfLinesHexValue = (minimumNumberOfLines.toString(16).length == 1) ? `0${minimumNumberOfLines.toString(16)}` : minimumNumberOfLines.toString(16);
-    minimumNumberOfLinesContainer.innerHTML = `Just <span class="cursor-pointer underline-offset-4 hover:underline" onclick="copy(this)" title="Copy">${minimumNumberOfLines}</span> (<span class="cursor-pointer underline-offset-4 hover:underline" onclick="copy(this)" title="Copy">${minimumNumberOfLinesHexValue}</span>) lines!`;
+    minimumNumberOfLinesContainer.innerHTML = `Just <span class="cursor-pointer underline-offset-4 hover:underline" onclick="copy(this)" title="Copy">${minimumNumberOfLines}</span> (<span class="cursor-pointer underline-offset-4 hover:underline" onclick="copy(this)" title="Copy">${minimumNumberOfLinesHexValue}</span>) line${(minimumNumberOfLines == 1) ? '' : 's'}!`;
   }
 });
 
