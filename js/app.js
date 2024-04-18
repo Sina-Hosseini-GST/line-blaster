@@ -185,14 +185,16 @@ const addSubScriptToTheTable = (lineNumber, subScript, subScriptLength) => {
 };
 
 const copy = (element) => {
-  const text = element.textContent.trim();
-  navigator.clipboard.writeText(text);
+  let text = element.textContent;
+  if (element.getAttribute('id') == 'script-with-breaklines') {
+    text = '';
+    for (let i = 0; i < element.children.length; i++) {
+      const paragraph = element.children[i];
+      text += paragraph.textContent + '\n';
+    }
+  }
+  navigator.clipboard.writeText(text.trim());
 };
-
-const setPosition = (element) => {
-  element.style.left = `${Math.round(Math.random() * 5)}px`;
-  element.style.top = `${Math.round(Math.random() * 5)}px`;
-}
 
 const writeMessage = (message) => {
   // Hide message
